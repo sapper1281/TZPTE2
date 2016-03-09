@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h:form prependId="false" class="printing">  
+                    <p:link value="Ведомость" href="../../docs/${userReportPageBean.link}" id="printer"/>
+                    <p:panel id="info" styleClass="printing, testInfo">
+                        <div class="testInfo">
+
+                            <h3>
+                                <p:outputLabel value="Уникальный идентификационный номер аттестуемого лица"/></h3>
+                            <p:outputLabel value="#{userReportPageBean.usr.num}"/>
+
+                            <p:separator/>
+
+                            <p>
+                                <p:outputLabel value="#{msgs.creationDate}"/>
+                                <p:outputLabel value="#{autorizationBean.currentUser.dateString}"/>
+                            </p>
+                            <p>
+                                <p:outputLabel value="#{msgs.questionQount}"/>
+                                <p:outputLabel value="#{userReportPageBean.total}"/>
+                            </p>
+                            <p>
+                                <p:outputLabel value="#{msgs.correctAnswersCount}"/>
+                                <p:outputLabel value="#{userReportPageBean.correct}" styleClass="corect"/>
+                            </p>
+                            <p>
+                                <p:outputLabel value="#{msgs.incorrectAnswersCount}"/>
+                                <p:outputLabel value="#{userReportPageBean.incorrect}" styleClass="incorect"/>
+                            </p>
+
+                        </div>
+                        <c:forEach items="#{userReportPageBean.questions}" var="itm">
+                            <p:separator/>
+                            <div class="questionAnswer">
+                                <h2>
+                                    <h:outputFormat value="#{msgs.questionHeader}">
+                                        <f:param value="#{itm.questionNumber+1}"/>
+                                        <f:param value="#{itm.question.id}"/>
+                                    </h:outputFormat>
+                                </h2>
+                                <h3>
+                                    <p:outputLabel value="#{msgs.questionHeaderShort}"/>
+                                </h3>
+                                <p>
+                                    <p:outputLabel value="#{itm.question.text}" escape="false"/>
+                                </p>
+                                <h2>
+                                    <p:outputLabel value="#{msgs.answers}"/>
+                                </h2>
+                                <p:dataList type="ordered"  value="#{itm.question.answers}" var="ans" styleClass="printing">
+                                    <p:outputLabel value="#{ans.text}" escape="false"/>
+
+                                </p:dataList>
+                                <h2>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.correctAnswer}"/>
+                                        <p:outputLabel value="#{itm.correctNumber()}"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.givenAnswer}"/>
+                                        <p:outputLabel value="#{itm.givenNumber()}"/>
+                                    </p>
+                                </h2>
+                            </div>
+                        </c:forEach>
+                    </p:panel>
+                </h:form>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="top1">   
+                <h:form id="menu"> <p:tabMenu  activeIndex="1">
+                        <p:menuitem  url="/faces/question.xhtml"   value="Вопросы"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/vocabulary.xhtml"   value="Настройки"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/users.xhtml"   value="Билеты"  icon="ui-icon-wrench"/>
+                    </p:tabMenu>
+
+                </h:form>
+            </ui:define>
+
+
+
+            <ui:define name="content">
+
+                <h:form id="formtheme1" >  
+                    <h:panelGrid id="panelGrid0" columns="2" cellpadding="2" styleClass="loginForm" columnClasses="leftColumn, rightColumn">  
+                        <h:outputLabel  for="time" value="Основания" />  
+
+                        <p:inputTextarea styleClass="longEdit" id="time" value="#{settingsPageBean.time}"/>
+
+                        <h:outputLabel  for="length" value="Предупреждение" />  
+
+                        <p:inputTextarea styleClass="longEdit" id="length" value="#{settingsPageBean.count}"/>
+
+                        <p:commandButton   value="Сохранить" actionListener="#{settingsPageBean.save()}"/> 
+                    </h:panelGrid>  
+                </h:form>
+
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

@@ -1,0 +1,289 @@
+/* 
+    Document   : Main
+    Created on : 09.09.2013, 11:32:33
+    Author     : VVolgina
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+html {
+    height: 100%; 
+    margin: 0px;
+}
+
+root { 
+    display: block;
+}
+
+body{
+    background-color: #DADFE1; 
+    text-align: center;
+    margin: 0px; 
+    height: 100%;
+}
+
+.mainDiv{
+    width: 1000px;
+    margin: auto;
+}
+
+.infoDiv{
+    color: #242b2d; 
+    width: 99%;
+    background-position: left top;
+    margin: 0px;
+    padding: 0px;
+    z-index: -2;
+}
+
+.infoDivMain{
+    width: 100%;
+    background-position: left 3px;
+    background-color: white;
+    background-image: url(../file/sheet.png);
+    background-repeat: repeat-y;
+    margin: 0px;
+    padding: 0px;
+    z-index: -2;
+    overflow: hidden;
+}
+
+.infoDivTop{
+    width: 100%;
+    height: 3px;
+    background-position: left top;
+    background-image: url(../file/sheet_t.png);
+    margin: 0px;
+    padding: 0px;
+    z-index: -2;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.infoDivBottom{
+    width: 100%;
+    height: 3px;
+    background-position: left bottom;
+    background-image: url(../file/sheet_b.png);
+    margin: 0px;
+    padding: 0px;
+    z-index: -2;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.logo{
+    display: block;
+    left: 2%;
+    margin-left: -1px;
+    position: absolute;
+    top: 0;
+    width: 81px;
+    height: 50px;
+    background-image: url('../file/header-object.png');
+    margin: 0px;
+}
+
+.smallGreyText{  
+    color: #999999;
+    font-size: x-small;
+}
+
+.errorText{
+    font-family: Georgia,'Times New Roman',times,serif;
+    color: #ff0000;
+    font-variant: small-caps;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.button{
+    text-align: center;
+    padding: 4px;
+    margin: 5px;
+    border-width: 0px !important;
+}
+
+.button1{
+    text-align: center;
+    padding: 3px;
+    margin: 5px;
+}
+
+.invisibleButton{
+    width: 0px;
+    height: 0px;
+}
+
+.middleColumn{
+    text-align: left;
+    width: 40%;
+}
+
+.rightColumn{
+    text-align: left;
+    width: 0%;
+}
+
+.leftColumn{
+    text-align: right;
+    width: 20%;
+}
+
+.longEdit{
+    width: 95%;
+}
+
+.longEditSelect{
+    width: 97%  !important;
+}
+
+.normalForm{
+    width: 80%;
+    padding-left: 100px;
+}
+
+.testInfo{
+    text-align: left;
+    padding: 20px 20px 0px 20px;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+    font-style: normal;
+    letter-spacing: 2px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+    color: #687B82;  
+}
+
+.testInfo p label, .testInfo p{
+    padding: 0px;
+    margin: 0px;
+    font-size: 16px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+}
+
+.questionAnswer{
+    text-align: left;
+    padding: 0px 20px 20px 20px;
+    margin: 0px 20px 20px 20px;
+    font-size: 14px;
+    font-style: normal;
+    letter-spacing: 2px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+    color: #687B82;  
+}
+
+.questionAnswer h2{
+    text-align: left;
+    font-size: 19px;
+    font-style: normal;
+    font-variant: small-caps;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+    color: #687B82;  
+}
+
+.question{
+    background-color: lightgray;
+    background-image: url(../file/postquote.png);
+    background-position: top left;
+    background-repeat: no-repeat;
+    padding: 22px 20px 20px 47px;
+    margin: 0px 20px 20px 20px;
+    color: black;
+}
+
+.question h2{
+    font-size: 19px;
+    font-style: normal;
+    font-weight: bolder;
+    font-variant: normal;
+    letter-spacing: 2px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+    color: #687B82;  
+    padding: 0px;
+    margin: 0px;
+}
+
+.question p{
+    font-style: italic;
+    letter-spacing: 0px;
+}
+
+.answers h2{
+    font-size: 19px;
+    font-style: normal;
+    font-weight: bolder;
+    font-variant: normal;
+    letter-spacing: 2px;
+    font-family: "Times New Roman", Georgia, Times, Serif;
+    color: #687B82;  
+    padding: 0px;
+    margin: 0px;
+}
+
+.answers table{
+
+    color: black;
+}
+
+.answers table tr td{
+    padding: 5px 5px 10px 5px;
+}
+
+.corect{
+    color: green;
+}
+
+.incorect{
+    color: red;
+}
+
+
+.printing{
+    background-color: white !important;
+    border-width: 0px !important;
+    background-image: none !important;
+    padding: 10px !important;
+    width: 90%;
+}
+
+.centralisaton{
+    margin: auto;
+    text-align: center;
+}
+
+@media print {
+    .printing{
+        color: black;
+    }
+
+    .corect{
+        color: black;
+    }
+
+    .incorect{
+        color: black;
+    }
+
+    .testInfo{
+        color: black;
+    }
+
+    .questionAnswer{
+        color: black;  
+    }
+
+    .answers h2{
+        color: black;
+    }
+
+    .question h2{
+        color: black;
+    }
+
+    .questionAnswer h2{
+        color: black;
+    }
+}

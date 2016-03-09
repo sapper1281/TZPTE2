@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/xhtml; charset=UTF-8" />
+            <meta http-equiv="Cache-Control" content="no-cache" />
+            <meta http-equiv="Pragma" content="no-cache" />
+            <title>#{msgs.title}</title>
+        </f:facet>
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/Main.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            PrimeFaces.locales ['ru'] = {
+                closeText: 'Закрыть',
+                prevText: 'Назад',
+                nextText: 'Вперёд',
+                monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+                dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субота'],
+                dayNamesShort: ['Воск', 'Пон', 'Вт', 'Ср', 'Четв', 'Пят', 'Суб'],
+                dayNamesMin: ['В', 'П', 'Вт', 'С ', 'Ч', 'П ', 'Сб'],
+                weekHeader: 'Неделя',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Время',
+                timeText: 'Время',
+                hourText: 'Час',
+                minuteText: 'Минута',
+                secondText: 'Секунда',
+                currentText: 'Сегодня',
+                ampm: false,
+                month: 'Месяц',
+                week: 'неделя',
+                day: 'День',
+                allDayText: 'Весь день'
+            };
+        </script>
+    </h:head>
+
+    <h:body>
+        <div class="mainDiv">
+
+            <div id="top1">
+                <div class="logo">
+
+                    <p:graphicImage url="resources/file/logo2.png"/>
+                    <p:graphicImage url="resources/file/logo1.png"/>
+                    <p:graphicImage url="resources/file/logo3.png"/>
+                </div>
+                <div class="underlogo">
+                    <div class="correction2">
+                        Федеральное государственное предприятие «Ведомственная охрана железнодорожного транспорта Российской Федерации»
+                    </div>
+                    <div class="correction">
+                        Федеральное  Агентство железнодорожного транспорта (Росжелдор)
+
+                    </div>
+                    <div class="correction1">
+                        Общество с ограниченной ответственностью «ВЕНТРАН-Телеком»
+                    </div>
+                </div>
+            </div>
+
+            <div class="left_content">
+                <p:panel>
+                    <h1>
+                        Программно-аппаратный комплекс проверки (тестирования) знаний, умений и навыков аттестуемых лиц требованиям законодательства Российской Федерации о транспортной безопасности
+                    </h1>
+                    <h2>Для начала работы нажмите «Далее»</h2>
+                    <h3>Версия 1.0</h3>
+                    <h:button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1" outcome="index_1_1.xhtml" value="Далее ->"/>
+                </p:panel>
+            </div>
+            <div id="bottom">
+
+                <p>
+                    <p:outputLabel value="#{msgs.whereCreated}"/>
+                </p>
+                <p:outputLabel value="#{msgs.developers}" styleClass="smallGreyText"/>
+            </div>
+        </div>
+    </h:body>
+
+</html>
+
+

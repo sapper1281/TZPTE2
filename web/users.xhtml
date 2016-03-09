@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="top1">   
+                <h:form id="menu"> <p:tabMenu  activeIndex="2">
+                        <p:menuitem  url="/faces/question.xhtml"   value="Вопросы"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/vocabulary.xhtml"   value="Настройки"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/users.xhtml"   value="Билеты"  icon="ui-icon-wrench"/>
+                    </p:tabMenu>
+
+                </h:form>
+            </ui:define>
+
+
+
+            <ui:define name="content">
+
+                <h:form id="formtheme1" >  
+                    <h:panelGrid id="panelGrid0" columns="3" cellpadding="2">  
+                        <h:outputLabel  for="themes" value="Введите ФИО" />  
+                        <p:inputMask id="themes" value="#{usersBean.toSearch}" mask="9999999999999" required="true" requiredMessage="Введите уникальный идентификационный номер аттестуемого лица" tabindex="1"/> 
+
+                        <h:commandButton id="login" action="#{usersBean.doSearch()}" tabindex="3" value="ОК" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1"/>
+                        <p:messages/>
+                    </h:panelGrid>
+
+                    <p:dataList rendered="#{usersBean.toSearch!=0}" emptyMessage="#{msgs_question.notQuestion}" value="#{usersBean.tickets}"  var="question1" type="ordered">  
+
+                        <p:link id="ss#{question1.id}" value="#{question1.dateString} #{question1.user.FIO}" href="../../docs/${question1.id}.doc"/>
+                    </p:dataList>
+                </h:form>
+
+                <p:dialog id="dlg" widgetVar="dlg" header="Отчет" dynamic="true" style="height: 3000px;" height="3000px" >
+                    <p:scrollPanel>
+                        <h:form prependId="false" class="printing">  
+                            <p:commandButton value="Распечатать" ajax="false" id="printer" icon="ui-print">
+                                <p:printer target="info" />  
+                            </p:commandButton>  
+
+                            <p:panel id="info" styleClass="printing, testInfo">
+                                <div class="testInfo">
+
+                                    <h3>
+                                        <p:outputLabel value="#{msgs.FIO}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.tick.user.FIO}"/>
+                                    </h3>
+                                    <p:separator/>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.ticketNum}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.tick.id}"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.creationDate}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.tick.dateString}"/>
+                                    </p>
+                                    <p>
+                                        <h:outputFormat value="#{msgs.remainTime}">
+                                            <f:param value="#{userReportPageBeanAdmin.remain}"/>
+                                        </h:outputFormat>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.questionQount}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.total}"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.answersQount}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.answered}"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.correctAnswersCount}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.correct}" styleClass="corect"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.incorrectAnswersCount}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.incorrect}" styleClass="incorect"/>
+                                    </p>
+                                    <p>
+                                        <p:outputLabel value="#{msgs.nonanswered}"/>
+                                        <p:outputLabel value="#{userReportPageBeanAdmin.nonAnswered}" styleClass="incorect"/>
+                                    </p>
+
+                                </div>
+                                <c:forEach items="#{userReportPageBeanAdmin.questions}" var="itm">
+                                    <p:separator/>
+                                    <div class="questionAnswer">
+                                        <h2>
+                                            <h:outputFormat value="#{msgs.questionHeader}">
+                                                <f:param value="#{itm.questionNumber+1}"/>
+                                                <f:param value="#{itm.question.id}"/>
+                                            </h:outputFormat>
+                                        </h2>
+                                        <h3>
+                                            <p:outputLabel value="#{msgs.questionHeaderShort}"/>
+                                        </h3>
+                                        <p>
+                                            <p:outputLabel value="#{itm.question.text}" escape="false"/>
+                                        </p>
+                                        <h2>
+                                            <p:outputLabel value="#{msgs.answers}"/>
+                                        </h2>
+                                        <p:dataList type="ordered"  value="#{itm.question.answers}" var="ans" styleClass="printing">
+                                            <p:outputLabel value="#{ans.text}" escape="false"/>
+
+                                        </p:dataList>
+                                        <h2>
+                                            <p>
+                                                <p:outputLabel value="#{msgs.correctAnswer}"/>
+                                                <p:outputLabel value="#{itm.correctNumber()}"/>
+                                            </p>
+                                            <p>
+                                                <p:outputLabel value="#{msgs.givenAnswer}"/>
+                                                <p:outputLabel value="#{itm.givenNumber()}"/>
+                                            </p>
+                                        </h2>
+                                    </div>
+                                </c:forEach>
+                            </p:panel>
+                        </h:form>  
+                    </p:scrollPanel>
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

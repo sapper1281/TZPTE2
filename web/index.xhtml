@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="content">
+                <h1>ВВОД  ДАННЫХ  ОБ  АТТЕСТУЕМОМ ЛИЦЕ</h1>
+                <h2>Уникальный идентификационный номер аттестуемого лица</h2>
+                <h3>(заполняется аттестуемым)</h3>
+                <h:form class="centralisaton">
+                    <p:inputMask value="#{autorisationPageBean.num}" mask="9999999999999" required="true" requiredMessage="Введите уникальный идентификационный номер аттестуемого лица" id="fio" tabindex="1" styleClass="longEdit"/> 
+                    <h:panelGrid columns="4" columnClasses="leftColumn, middleColumn1, middleColumn2, rightColumn" styleClass="normalForm">
+                        <p:panel styleClass="withoutBorder">
+                            <h3 class="withoutBorder">
+                                <p:outputLabel for="fio" value="Решение о присвоении уникального идентификационного номера" styleClass="withoutBorder"/>
+                            </h3>
+                        </p:panel>
+
+                        <p:inputText value="#{autorisationPageBean.numNum}"  required="true" requiredMessage="Введите номер решения" id="fio1" tabindex="2" styleClass="longEdit"/> 
+
+
+                        <p:calendar value="#{autorisationPageBean.numDat}" readonlyInput="true" id="popupButton2Cal" required="true" showOn="button" locale="ru" navigator="true" pattern="dd/MM/yyyy">
+                        </p:calendar>
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText id="popupButton2Date" value="#{autorisationPageBean.numDat}"/>
+                        </p:dialog>
+
+
+                        <p:panel styleClass="withoutBorder">
+                            <h3 class="withoutBorder">
+                                <p:outputLabel for="popupButton2Cal" value="Решение о допуске к прохождению проверок " styleClass="withoutBorder"/>
+                            </h3>
+
+                        </p:panel>
+                        <p:inputText value="#{autorisationPageBean.allowNum}" required="true" requiredMessage="Введите номер решения" id="fio2" tabindex="3" styleClass="longEdit"/> 
+                        <p:calendar value="#{autorisationPageBean.allowDat}" readonlyInput="true" id="popupButtonCal" required="true" showOn="button" locale="ru" navigator="true" pattern="dd/MM/yyyy">
+                        </p:calendar>
+
+                        <p:dialog header="Selected Dates" widgetVar="dialog" 
+                                  showEffect="fade" hideEffect="fade">
+                            <h:outputText id="popupButtonDate" value="#{autorisationPageBean.allowDat}"/>
+                        </p:dialog>
+
+
+                    </h:panelGrid>    
+                    <h:commandButton id="login" action="#{autorisationPageBean.logIn()}" tabindex="3" value="Начать тестирование" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1"/>
+                    <p:messages/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

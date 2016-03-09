@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <application> 
+        <resource-bundle> 
+            <base-name>news.news</base-name> 
+            <var>msgs</var> 
+        </resource-bundle> 
+        
+        <resource-bundle> 
+            <base-name>rzd.vivc.astzpte.beans.pagebean.department</base-name> 
+            <var>msgs_department</var> 
+        </resource-bundle>
+        <resource-bundle> 
+            <base-name>rzd.vivc.astzpte.beans.pagebean.theme</base-name> 
+            <var>msgs_theme</var> 
+        </resource-bundle>
+
+       <resource-bundle> 
+            <base-name>rzd.vivc.astzpte.beans.pagebean.question</base-name> 
+            <var>msgs_question</var> 
+        </resource-bundle>
+
+    </application>
+    
+    
+    
+    <navigation-rule> 
+        <navigation-case> 
+            <from-outcome>error</from-outcome> 
+            <to-view-id>/errorpage.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+    <navigation-rule> 
+        <from-view-id>
+            /index.xhtml
+        </from-view-id>
+        <navigation-case> 
+            <from-outcome>adminentry</from-outcome> 
+            <to-view-id>/question.xhtml</to-view-id> 
+        </navigation-case> 
+        <navigation-case> 
+            <from-outcome>userentry</from-outcome> 
+            <to-view-id>/index_2_1.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+    <navigation-rule> 
+        <from-view-id>
+            /adminindex.xhtml
+        </from-view-id>
+        <navigation-case> 
+            <from-outcome>adminentry</from-outcome> 
+            <to-view-id>/question.xhtml</to-view-id> 
+        </navigation-case> 
+        <navigation-case> 
+            <from-outcome>userentry</from-outcome> 
+            <to-view-id>/usermain.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+    <navigation-rule> 
+        <navigation-case> 
+            <from-outcome>totest</from-outcome> 
+            <to-view-id>/tickets.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+        <navigation-rule> 
+        <navigation-case> 
+            <from-outcome>totest1</from-outcome> 
+            <to-view-id>/usermain.xhtml</to-view-id> 
+        </navigation-case> 
+    </navigation-rule> 
+    
+    <navigation-rule> 
+        <from-view-id>
+            /usermain.xhtml
+        </from-view-id>
+        <navigation-case> 
+            <from-outcome>result</from-outcome> 
+            <to-view-id>/userreport.xhtml</to-view-id> 
+        </navigation-case>  
+    </navigation-rule> 
+
+</faces-config>

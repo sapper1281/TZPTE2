@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="top1">   
+                <h:form id="menu"> <p:tabMenu  activeIndex="0">
+                        <p:menuitem  url="/faces/question.xhtml"   value="Вопросы"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/vocabulary.xhtml"   value="Настройки"  icon="ui-icon-wrench"/>
+                        <p:menuitem  url="/faces/users.xhtml"   value="Билеты"  icon="ui-icon-wrench"/>
+                    </p:tabMenu>
+
+                </h:form>
+            </ui:define>
+
+
+
+            <ui:define name="content">
+
+                <h:form id="formtheme1" >  
+                    <h:panelGrid id="panelGrid0" columns="2" cellpadding="2" columnClasses="leftColumn, rightColumn">  
+                        <h:outputLabel  for="themes" value="#{msgs_theme.departmen}" />  
+
+                        <p:selectOneMenu id="themes" value="#{qBean.themeID}" styleClass="fixedEditSelect"  panelStyleClass="fixedEditSelectItems" > 
+                            <f:selectItem itemLabel="#{msgs_question.theme_select}"  itemValue="0"/>  
+                            <f:selectItems var="themes" value="#{qBean.themes}"  itemLabel="#{themes.name}" itemValue="#{themes.id}" />  
+                            <p:ajax update=":formtheme1:panelGrid0" listener="#{qBean.generateTicketList()}" />
+                        </p:selectOneMenu>  
+
+                        <h:outputLabel  for="tickets" value="Билеты" rendered="#{qBean.themeID!=0}"/>  
+                        <p:selectOneMenu id="tickets"  rendered="#{qBean.themeID!=0}" value="#{qBean.ticketID}" styleClass="fixedEditSelect"  panelStyleClass="fixedEditSelectItems" > 
+                            <f:selectItem itemLabel="Выберите билет"  itemValue="0"/>  
+                            <f:selectItems var="themes" value="#{qBean.ticketTemplates}"  itemLabel="Билет №#{themes.num}" itemValue="#{themes.id}" />  
+                            <p:ajax update=":formtheme1:panelGrid0" listener="#{qBean.geberateQuestionList()}" />
+                        </p:selectOneMenu>  
+                         <h:outputLabel value=" "/>  
+
+                        <p:dataList rendered="#{qBean.ticketID!=0}" emptyMessage="#{msgs_question.notQuestion}" value="#{qBean.questions}"  var="question1" type="ordered">  
+
+                            <p:commandLink id="ss#{qquestion1.id}"   actionListener="#{qBean.oldQuest(question1.temp_id)}" update=":formthemedialog2" oncomplete="PF('dlg').show()">
+                                <h:outputText value="#{question1.text.isEmpty()?'-':question1.text}" escape="false"/>
+                            </p:commandLink>
+                        </p:dataList>
+                    </h:panelGrid>  
+                </h:form>
+
+                <p:dialog id="dlg" widgetVar="dlg" header="#{msgs_question.header_text}">
+                    <h:form id="formthemedialog2">    
+                        <h:panelGrid columns="2" cellpadding="3">  
+                            <h:outputLabel for="themeName" value="#{msgs_theme.departmen} : " />  
+                            <h:outputText id="themeName" value="#{qBean.qurrentQuestion.ticketTemplate.theme.name}"/>
+
+                            <h:outputLabel for="questionName" value="#{msgs_question.departmen} : " />  
+                            <p:inputTextarea id="questionName" required="true" value="#{qBean.editText}"  styleClass="longEditLines"/> 
+
+                            <h:outputLabel  for="questionAnswer" value="#{msgs_question.answer} : " />  
+                            <h:panelGrid id="questionAnswer" columns="1" cellpadding="2">  
+                                <p:commandButton actionListener="#{qBean.newAns()}" value="#{msgs_question.addAnswer}"  oncomplete="PF('dlg1').show()" update=":formthemedialog3"/>
+                                <h:panelGrid  id="panelGrid1" columns="1" cellpadding="1"> 
+                                    <p:dataList emptyMessage="#{msgs_question.notAnswer}" value="#{qBean.qurrentQuestion.answers}" var="answers" type="ordered">  
+
+                                        <h:outputLabel value="#{answers.correct_name }" style="color:crimson " />  
+                                        <p:commandLink actionListener="#{qBean.oldAns(answers.temp_id)}"  oncomplete="PF('dlg1').show()"  update=":formthemedialog3">
+                                            <h:outputText   value=" #{answers.text}" escape="false"/>
+                                        </p:commandLink>
+                                        <p:commandButton value="удалить" styleClass="button2" update=":formthemedialog2" actionListener="#{qBean.delAns(answers.temp_id)}"/> 
+                                    </p:dataList>
+
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <h:commandButton id="brn" value="Добавить" action="#{qBean.saveQuestion()}" rendered="#{qBean.checkAnswersExists()}" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only button1"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog id="dlg1"  header="#{msgs_question.addAnswer}" widgetVar="dlg1" >
+                    <h:form id="formthemedialog3" >    
+                        <h:panelGrid columns="2" cellpadding="1">
+                            <h:outputLabel for="answerName" value="#{msgs_question.answer} : " />  
+                            <p:inputTextarea id="answerName" required="true" value="#{qBean.ans.text}" styleClass="longEditLines"/>
+                            <h:outputText value="Правильный ответ: " />
+                            <p:selectBooleanCheckbox value="#{qBean.ans.correct}" />
+                        </h:panelGrid>
+                        <p:commandButton  type="submit"  value="#{msgs_question.upload}"  update=":formthemedialog2" oncomplete="PF('dlg1').hide()" />
+                    </h:form>
+                </p:dialog>   
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+
